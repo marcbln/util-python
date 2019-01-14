@@ -106,7 +106,7 @@ class UtilFile:
         strJson = UtilFile.fileGetContents(path)
         return json.loads(strJson)
 
-    # 01/2019
+    # 01/2019 from photoBot
     @classmethod
     def appendToFilename(cls, path, suffix):
         name, ext = os.path.splitext(path)

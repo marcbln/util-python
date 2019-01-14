@@ -1,6 +1,6 @@
+import mimetypes
 import imageio
 import numpy as np
-
 from McxUtil.UtilCanvas import UtilCanvas
 from McxUtil.UtilMap import UtilMap
 
@@ -137,4 +137,10 @@ class UtilImageFile:
             return UtilCanvas.resize2017(scalar01, size)
         else:
             return scalar01
+
+
+    # 01/2019 (PhotoBot)
+    @classmethod
+    def isImageFile(cls, pathFile):
+        return mimetypes.MimeTypes().guess_type(pathFile)[0] in ['image/jpeg', 'image/png']
 
