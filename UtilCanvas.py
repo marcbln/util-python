@@ -8,13 +8,13 @@
  *
 """
 
+# 01/2019: FIXME: dependency on GenArt.DataTypes.Path2d.Vector2d
+
+
 import math
 
 import numpy as np
 from skimage.transform import resize
-
-# 12/2017: in push3 this was UtilFixSize
-from GenArt.DataTypes.Path2d.Vector2d import Vector2d
 
 
 class UtilCanvas:
@@ -45,15 +45,6 @@ class UtilCanvas:
         canvasWidth, canvasHeight = map(int, cls._canvasSize.split('x'))
         return (canvasWidth, canvasHeight)
 
-    @classmethod
-    def getCanvasSizeVector2d(cls):
-        canvasWidth, canvasHeight = map(int, cls._canvasSize.split('x'))
-        return Vector2d(canvasWidth, canvasHeight)
-
-    @classmethod
-    def getCanvasCenterVector2d(cls):
-        canvasWidth, canvasHeight = map(int, cls._canvasSize.split('x'))
-        return Vector2d(canvasWidth, canvasHeight) / 2.0
 
     @classmethod
     def getCanvasWidth(cls):
@@ -237,11 +228,34 @@ class UtilCanvas:
         """
         return np.zeros((cls.getCanvasHeight(), cls.getCanvasWidth(), 3))
 
+
     @classmethod
     def getCanvasDiagonal(cls):
         return math.sqrt(cls.getCanvasWidth() ** 2 + cls.getCanvasHeight() ** 2)
 
+
+
+
+    # ---- FIXME: dependency on Vector2d ... UtilCanvas does not belong into lib but into push4
+
     @classmethod
     def getVector2dOnCanvas(cls, x01, y01):
+        from GenArt.DataTypes.Path2d.Vector2d import Vector2d # FIXME
         (w, h) = cls.getCanvasSizeInt()
         return Vector2d(w * x01, h * y01)
+
+    @classmethod
+    def getCanvasSizeVector2d(cls):
+        from GenArt.DataTypes.Path2d.Vector2d import Vector2d # FIXME
+        canvasWidth, canvasHeight = map(int, cls._canvasSize.split('x'))
+        return Vector2d(canvasWidth, canvasHeight)
+
+    @classmethod
+    def getCanvasCenterVector2d(cls):
+        from GenArt.DataTypes.Path2d.Vector2d import Vector2d # FIXME
+        canvasWidth, canvasHeight = map(int, cls._canvasSize.split('x'))
+        return Vector2d(canvasWidth, canvasHeight) / 2.0
+
+
+
+
