@@ -3,7 +3,6 @@
 import json
 import os
 
-
 #
 #
 # def file_put_contents( path, content):
@@ -73,6 +72,8 @@ import os
 # def get_sub_directories(path):
 #     return [os.path.join(path,o) for o in os.listdir(path) if os.path.isdir(os.path.join(path,o))]
 #
+from glob import glob
+
 
 class UtilFile:
 
@@ -97,7 +98,6 @@ class UtilFile:
         strJson = UtilFile.fileGetContents(path)
         return json.loads(strJson)
 
-
     # 12/2017
     @staticmethod
     def loadJsonWithFallback(path, default={}):
@@ -112,4 +112,8 @@ class UtilFile:
         name, ext = os.path.splitext(path)
         return "{name}{suffix}{ext}".format(name=name, suffix=suffix, ext=ext)
 
-
+    # 03/2019 PhotoBot
+    # returns list of filenames only .. without directory .. eg ['a.json', 'b.json']
+    @classmethod
+    def getFilenamesInDirectory(cls, pathDirectory, pattern="*"):
+        return [os.path.basename(x) for x in glob(os.path.join(pathDirectory, pattern))]
