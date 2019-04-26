@@ -73,6 +73,7 @@ import os
 #     return [os.path.join(path,o) for o in os.listdir(path) if os.path.isdir(os.path.join(path,o))]
 #
 from glob import glob
+from pathlib import Path
 
 
 class UtilFile:
@@ -117,3 +118,12 @@ class UtilFile:
     @classmethod
     def getFilenamesInDirectory(cls, pathDirectory, pattern="*"):
         return [os.path.basename(x) for x in glob(os.path.join(pathDirectory, pattern))]
+
+
+    # 04/2019 PhotoBot
+    @classmethod
+    def mkdirIfNotExists(cls, dir):
+        if not os.path.isdir(dir):
+            path = Path(dir)
+            path.mkdir(parents=True)
+
